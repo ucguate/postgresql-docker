@@ -9,6 +9,6 @@ services:
     env_file:
       - database.env # configure postgres
     volumes:
-      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - /home/cloud_user/Desktop/data-temp:/var/lib/postgresql/data/ # persist data even if container shuts down
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
