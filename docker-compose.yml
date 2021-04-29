@@ -1,14 +1,33 @@
-# docker-compose.yml
 version: '3'
+
 services:
+  webapp:
+    image: jmadrazo97/php-pg-apache
+    container_name: 'php7-pg-apache'
+    ports: 
+      - "80:80"
+      - "443:443"
+    links: :
+      - database
+    volumes: 
+      - /home/cloud_user/Desktop/climahub:/app
+    networks: 
+      - lapp-stack
   database:
     image: "postgres" # use latest official postgres version
+    container_name: "postgresql"
     restart: always
     ports:
         - "5432:5432"
+    networks: 
+      - lapp-stack 
     env_file:
       - database.env # configure postgres
     volumes:
       - /home/cloud_user/Desktop/data-temp:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - ./my-postgres.conf:/etc/postgresql/postgresql.conf
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
+
+networks: 
+  lapp-stack:
