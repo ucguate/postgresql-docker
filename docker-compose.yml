@@ -4,6 +4,7 @@ services:
   webapp:
     image: jmadrazo97/php-pg-apache
     container_name: 'php7-pg-apache'
+    restart: always
     ports: 
       - "80:80"
       - "443:443"
